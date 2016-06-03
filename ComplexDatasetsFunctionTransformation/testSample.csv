@@ -1,15 +1,23 @@
-select p.ra, p.dec, s.z, p.expab_r, p.fibermag_r, p.petromag_r, p.petror90_r, p.lnlexp_r, p.lnldev_r, l.sigma, l.sigmaerr, l.ew, l.ewerr, l.chisq, l.nu, s.zwarning,p.isophi_r, p.isophi_i,p.expphi_r from photoobj p, specobj s, specline l where p.specobjid = s.specobjid and p.specobjid = l.specobjid and s.specclass=2 and p.expab_r < 0.7071 and p.petror90_r > 4 and l.ew > 10 and l.ew < 30 and l.sigma >= 2.1897 and l.sigma <= 15.3280 and p.lnlexp_r > (13.81+p.lnldev_r) and l.lineid = dbo.fspeclinenames('oii_3727') and p.ra >= 45 and p.ra <= 240 and p.dec >= -12 and p.dec <=80 and s.z >= 0.155 and s.z <= 0.25 order by l.ew desc
-select s.plate,s.mjd,s.fiberid,s.eclass,s.z,s.veldisp, l.dbo.fspeclinenames('caii_8500') from specobj s,specline l where (specclass = 2 and eclass < -0.02 and z < 0.4 and veldisp > -999)
-select s.plate,s.mjd,s.fiberid,s.eclass,s.z,s.veldisp, l.(dbo.fspeclinenames('caii_8500')) from specobj s,specline l where (specclass = 2 and eclass < -0.02 and z < 0.4 and veldisp > -999)
-select s.plate,s.mjd,s.fiberid,s.eclass,s.z,s.veldisp, dbo.fspeclinenames('caii_8500') from specobj s,specline l where (s.specclass = 2 and s.eclass < -0.02 and s.z < 0.4 and s.veldisp > -999)
-select top 50 plate,mjd,fiberid,dbo.fspeclinenames('caii_8500') from specline
-select top 50 dbo.fspeclinenames('caii_8500') from specline
-select p.ra, p.dec, s.z, p.expab_r, p.fibermag_r, p.petromag_r, p.petror90_r, p.lnlexp_r, p.lnldev_r, l.sigma, l.sigmaerr, l.ew, l.ewerr, l.chisq, l.nu, s.zwarning,p.isophi_r, p.isophi_i,p.expphi_r from photoobj p, specobj s, specline l where p.specobjid = s.specobjid and p.specobjid = l.specobjid and s.specclass=2 and p.expab_r < 0.7071 and p.petror90_r > 4 and l.ew > 10 and l.ew < 30 and l.sigma >= 2.1897 and l.sigma <= 15.3280 and p.lnlexp_r > (13.81+p.lnldev_r) and l.lineid = dbo.fspeclinenames('oii_3728') and p.ra >= 45 and p.ra <= 240 and p.dec >= -12 and p.dec <=80 and s.z >= 0.155 and s.z <= 0.25 order by l.ew desc
-select p.ra, p.dec, s.z, p.expab_r, p.fibermag_r, p.petromag_r, p.petror90_r, p.lnlexp_r, p.lnldev_r, l.sigma, l.sigmaerr, l.ew, l.ewerr, l.chisq, l.nu, s.zwarning,p.isophi_r, p.isophi_i,p.expphi_r from photoobj p, specobj s, specline l where p.specobjid = s.specobjid and p.specobjid = l.specobjid and s.specclass=2 and p.expab_r < 0.7071 and p.petror90_r > 4 and l.ew > 10 and l.ew < 30 and l.sigma >= 2.1897 and l.sigma <= 15.3280 and p.lnlexp_r > (13.81+p.lnldev_r) and l.lineid = dbo.fspeclinenames('oii_3727') and p.ra >= 45 and p.ra <= 240 and p.dec >= -12 and p.dec <=80 and s.z >= 0.155 and s.z <= 0.25 order by l.ew desc
-select p.ra p.dec s.z p.expab_r p.fibermag_r p.petromag_r p.petror90_r p.fibermag_i p.petromag_i p.petror90_i p.lnlexp_r p.lnldev_r l.sigma l.sigmaerr l.ew l.ewerr l.chisq l.nu s.zwarning from photoobj p specobj s specline l where p.specobjid = s.specobjid and p.specobjid = l.specobjid and s.specclass=2 and p.expab_r < 0.7071 and p.lnlexp_r > (13.81+p.lnldev_r) and l.lineid = dbo.fspeclinenames('ha_6565') and p.ra >= 49.5 and p.ra <= 49.7 and p.dec >= 1.0 and p.dec <=2 and s.z >= 0.160 and s.z <= 0.164 order by p.lnlexp_r desc
-select top 10 l.* fromgalaxy as g, specobj as s, specline as l where g.objid = s.bestobjid and (l.lineid = dbo.fspeclinenames('oiii_5008') )
-select name,enum from dbcolumns where tablename = 'fspeclinenames' and enum != ''
-select text from dbobjects where name = ""fspeclinenames
-select u.up_name as [name], x.objid, g.objid, g.ra, p.dec, s.z, g.expab_r, g.fibermag_r, g.petromag_r, g.petror90_r, g.modelmag_r, g.lnlexp_r, g.lnldev_r, l.sigma, l.sigmaerr, l.ew, l.ewerr, l.chisq, l.nu, s.zwarning, g.isophi_r, g.expphi_r from #x x, #upload u, galaxy g, specobj s, specline l where u.up_id = x.up_id g.objid = s.objid and g.specobjid = l.specobjid and s.specclass=2 and l.lineid = dbo.fspeclinenames('ha_6565')
-select p.ra, p.dec, s.z, p.petromag_g, l.ew, l.ewerr from photoobj p, specobj s, specline l where p.specobjid = s.specobjid and p.specobjid = l.specobjid and s.specclass=2 and p.ra between 180 and 181 and p.dec between 0 and 5 and l.lineid = dbo.fspeclinenames('ha_6565') and l.ew >0 and s.z<0.01 order by p.ra
-select u.up_name as [name], '<a target=info href=http://cas.sdss.org/astro/en/tools/explore/obj.asp?id=' + cast(x.objid as varchar(20)) + '>'+ cast(x.objid as varchar(20)) + '</a>' as objid, p.ra, p.dec, s.z, s.zwarning, l.sigma, l.sigmaerr, l.ew, l.ewerr, l.chisq, l.nu from #x x, #upload u, galaxy p, specobj s, specline l where u.up_id = x.up_id and x.objid=p.objid and p.specobjid = s.specobjid and p.specobjid = l.specobjid and l.lineid = dbo.fspeclinenames('ha_6565') order by x.up_id
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(179.983012 , 54.69254, 0), 'r') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(179.983012 , 54.69254, 0), 'r') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(179.983012 , 54.69254, 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(184.756037 , 49.894936, 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 182.79189,53.302901,0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(172.460583 , 52.32246,0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(174.637998 , 53.941805,0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(183.511638 , 54.634958 ,0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(184.258767 , 49.201752 ,0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(182.089546 , 49.771125 ,0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(179.983012 , 54.69254, 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(184.756037 , 49.894936 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(182.79189 , 53.302901 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 174.637998 , 53.941805, 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(177.955189 , 49.942922, 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq(184.332537 , 52.690854 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 184.710095 , 51.155503, 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 185.334003 , 54.795346 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 185.265347 , 54.571115 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 181.507107 , 51.696347 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 180.720214 , 51.683904 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 179.314038 , 52.507232 , 0), 'z') as fpc
+select dbo.fgeturlfitscframe(dbo.fgetnearestframeideq( 186.930099 , 49.384708 , 0), 'z') as fpc

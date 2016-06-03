@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import kit.labcourse.transformations.FGetNearbyObjEq;
+import kit.labcourse.transformations.FGetNearestFrameIdEq;
 import kit.labcourse.transformations.FGetObjFromRect;
 import kit.labcourse.transformations.FPhotoFlags;
 import kit.labcourse.transformations.FPhotoType;
@@ -42,6 +43,8 @@ public class MainClass {
 					line = FPrimTarget.transform(line);
 				if (line.contains("fspeclinenames"))
 					line = FSpecLineNames.transform(line);
+				if (line.contains("fgetnearestframeideq"))
+					line = FGetNearestFrameIdEq.transform(line);
 				if (!line.isEmpty())
 					transformedFile.write(line + "\n");
 			}
