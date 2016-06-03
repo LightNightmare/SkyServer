@@ -2,21 +2,21 @@ package kit.labcourse.transformations;
 
 import java.util.regex.Pattern;
 
-public class FPhotoFlags {
-
+public class FSpecLineNames {
+	
 	public static String transform (String line) {
-		
+
 		String[] partsWithoutFuncName = null;
 		//the while exists because some users may have used the same function in the query multiple times
-		while (line.contains("fphotoflags") || line.contains("dbo.fphotoflags")) {
-			if (line.contains("dbo.fphotoflags")) {
-				//splits line into parts at the first occurrence of "dbo.fphotoflags" in the line
-				partsWithoutFuncName = line.split("dbo.fphotoflags", 2);
+		while (line.contains("fspeclinenames") || line.contains("dbo.fspeclinenames")) {
+			if (line.contains("dbo.fspeclinenames")) {
+				//splits line into parts at the first occurrence of "dbo.fspeclinenames" in the line
+				partsWithoutFuncName = line.split("dbo.fspeclinenames", 2);
 			}
-			else if (line.contains("fphotoflags")) {
-				partsWithoutFuncName = line.split("fphotoflags", 2);
+			else if (line.contains("fspeclinenames")) {
+				partsWithoutFuncName = line.split("fspeclinenames", 2);
 			}
-				
+
 			String[] partsWithoutFuncParenth = null;
 			//splits the part of original line that had the function's parameters at the first closed parenthesis
 			//the first element of the array contains the parameters of the function
@@ -34,7 +34,7 @@ public class FPhotoFlags {
 
 			//constructing the new line
 			if (parameter != "" && partsWithoutFuncParenth != null && partsWithoutFuncParenth.length > 1) {
-				line = partsWithoutFuncName[0] + "(select convert(int, value) from photoflags where name = "
+				line = partsWithoutFuncName[0] + "(select value from speclinenames where name = "
 						+ parameter + ")" + partsWithoutFuncParenth[1];
 			}
 			else

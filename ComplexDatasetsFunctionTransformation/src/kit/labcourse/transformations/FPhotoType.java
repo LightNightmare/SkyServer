@@ -2,19 +2,19 @@ package kit.labcourse.transformations;
 
 import java.util.regex.Pattern;
 
-public class FPhotoFlags {
+public class FPhotoType {
 
 	public static String transform (String line) {
 		
 		String[] partsWithoutFuncName = null;
 		//the while exists because some users may have used the same function in the query multiple times
-		while (line.contains("fphotoflags") || line.contains("dbo.fphotoflags")) {
-			if (line.contains("dbo.fphotoflags")) {
-				//splits line into parts at the first occurrence of "dbo.fphotoflags" in the line
-				partsWithoutFuncName = line.split("dbo.fphotoflags", 2);
+		while (line.contains("fphototype") || line.contains("dbo.fphototype")) {
+			if (line.contains("dbo.fphototype")) {
+				//splits line into parts at the first occurrence of "dbo.fphototype" in the line
+				partsWithoutFuncName = line.split("dbo.fphototype", 2);
 			}
-			else if (line.contains("fphotoflags")) {
-				partsWithoutFuncName = line.split("fphotoflags", 2);
+			else if (line.contains("fphototype")) {
+				partsWithoutFuncName = line.split("fphototype", 2);
 			}
 				
 			String[] partsWithoutFuncParenth = null;
@@ -34,7 +34,7 @@ public class FPhotoFlags {
 
 			//constructing the new line
 			if (parameter != "" && partsWithoutFuncParenth != null && partsWithoutFuncParenth.length > 1) {
-				line = partsWithoutFuncName[0] + "(select convert(int, value) from photoflags where name = "
+				line = partsWithoutFuncName[0] + "(select value from phototype where name = "
 						+ parameter + ")" + partsWithoutFuncParenth[1];
 			}
 			else
@@ -43,4 +43,5 @@ public class FPhotoFlags {
 		}
 		return line;
 	}
+	
 }

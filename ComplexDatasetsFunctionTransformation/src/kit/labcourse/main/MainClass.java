@@ -9,7 +9,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import kit.labcourse.transformations.FGetNearbyObjEq;
+import kit.labcourse.transformations.FGetObjFromRect;
 import kit.labcourse.transformations.FPhotoFlags;
+import kit.labcourse.transformations.FPhotoType;
+import kit.labcourse.transformations.FPrimTarget;
+import kit.labcourse.transformations.FSpecClass;
+import kit.labcourse.transformations.FSpecLineNames;
 
 public class MainClass {
 
@@ -19,17 +24,26 @@ public class MainClass {
 			BufferedWriter transformedFile = new BufferedWriter (new FileWriter (new File(".\\transformed.csv"), true));
 			
 			String line = "";
-			String newLine = "";
+			String oldLine = "";
 			
 			while((line = fileWithFunc.readLine()) != null) {
+				oldLine = line;
 				if (line.contains("fphotoflags"))
-					newLine = FPhotoFlags.transform(line);
-				else if (line.contains("fgetnearbyobjeq"))
-					newLine = FGetNearbyObjEq.transform(line);
-				else
-					newLine = line;
-				if (!newLine.isEmpty())
-					transformedFile.write(newLine + "\n");
+					line = FPhotoFlags.transform(line);
+				if (line.contains("fgetnearbyobjeq"))
+					line = FGetNearbyObjEq.transform(line);
+				if (line.contains("fgetobjfromrect"))
+					line = FGetObjFromRect.transform(line);
+				if (line.contains("fphototype"))
+					line = FPhotoType.transform(line);
+				if (line.contains("fspecclass"))
+					line = FSpecClass.transform(line);
+				if (line.contains("fprimtarget"))
+					line = FPrimTarget.transform(line);
+				if (line.contains("fspeclinenames"))
+					line = FSpecLineNames.transform(line);
+				if (!line.isEmpty())
+					transformedFile.write(line + "\n");
 			}
 			
 			fileWithFunc.close();

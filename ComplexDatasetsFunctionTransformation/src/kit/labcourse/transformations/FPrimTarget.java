@@ -2,19 +2,19 @@ package kit.labcourse.transformations;
 
 import java.util.regex.Pattern;
 
-public class FPhotoFlags {
+public class FPrimTarget {
 
 	public static String transform (String line) {
 		
 		String[] partsWithoutFuncName = null;
 		//the while exists because some users may have used the same function in the query multiple times
-		while (line.contains("fphotoflags") || line.contains("dbo.fphotoflags")) {
-			if (line.contains("dbo.fphotoflags")) {
-				//splits line into parts at the first occurrence of "dbo.fphotoflags" in the line
-				partsWithoutFuncName = line.split("dbo.fphotoflags", 2);
+		while (line.contains("fprimtarget") || line.contains("dbo.fprimtarget")) {
+			if (line.contains("dbo.fprimtarget")) {
+				//splits line into parts at the first occurrence of "dbo.fprimtarget" in the line
+				partsWithoutFuncName = line.split("dbo.fprimtarget", 2);
 			}
-			else if (line.contains("fphotoflags")) {
-				partsWithoutFuncName = line.split("fphotoflags", 2);
+			else if (line.contains("fprimtarget")) {
+				partsWithoutFuncName = line.split("fprimtarget", 2);
 			}
 				
 			String[] partsWithoutFuncParenth = null;
@@ -34,12 +34,12 @@ public class FPhotoFlags {
 
 			//constructing the new line
 			if (parameter != "" && partsWithoutFuncParenth != null && partsWithoutFuncParenth.length > 1) {
-				line = partsWithoutFuncName[0] + "(select convert(int, value) from photoflags where name = "
+				line = partsWithoutFuncName[0] + "(select convert(int, value) from primtarget where name = "
 						+ parameter + ")" + partsWithoutFuncParenth[1];
 			}
 			else
 				line = "";
-
+			
 		}
 		return line;
 	}
