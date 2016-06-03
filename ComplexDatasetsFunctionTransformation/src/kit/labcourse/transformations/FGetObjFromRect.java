@@ -2,7 +2,7 @@ package kit.labcourse.transformations;
 
 import java.util.regex.Pattern;
 
-public class FGetNearbyObjEq {
+public class FGetObjFromRect {
 
 	public static String transform (String line) {
 		
